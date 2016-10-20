@@ -41,4 +41,10 @@ public class SubCategoryServiceImpl implements SubCategoryService{
     public void delete(int id) {
         subCategoryRepository.delete(id);
     }
+
+
+    @Override
+    public SubCategory findByName(String name) {
+        return subCategoryRepository.findByName(name);
+    }
 }

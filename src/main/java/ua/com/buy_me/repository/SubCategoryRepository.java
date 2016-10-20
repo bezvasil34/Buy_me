@@ -12,11 +12,11 @@ import java.util.List;
  */
 public interface SubCategoryRepository extends JpaRepository<SubCategory, Integer>{
 
-//    Colors findByName(@Param("name") String name);
-//    @Query("select cl from Colors cl join fetch cl.commodityList c where c.id=:idCommodity")
-//    List<Colors> findColorsByCommodity(@Param(value="idCommodity") int id);
 
     @Query("select sc from SubCategory sc join fetch sc.category c")
     List<SubCategory> findSubCategoryFetch();
+
+    @Query("select sc from SubCategory sc where sc.name =:name")
+    SubCategory findByName(@Param(value = "name") String name);
 
 }

@@ -14,6 +14,7 @@ public interface SubCategoryService {
     List<SubCategory> findAllfetch();
     SubCategory findOne(int id);
     void delete(int id);
+    SubCategory findByName(String name);
 
 
 }

@@ -10,7 +10,8 @@
 <html>
 <head>
     <title>registration</title>
-    <link type="text/css" rel="stylesheet" href="/resources/registration.css">
+    <link type="text/css" rel="stylesheet" href="/resources/css/registration.css">
+    <script src="/resources/js/"></script>
 </head>
 <body>
 <div class="login">
