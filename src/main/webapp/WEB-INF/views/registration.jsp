@@ -1,3 +1,4 @@
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%--
   Created by IntelliJ IDEA.
   User: koko
@@ -9,14 +10,30 @@
 <html>
 <head>
     <title>registration</title>
+    <link type="text/css" rel="stylesheet" href="/resources/registration.css">
 </head>
 <body>
-    <div style="text-align: center; margin-top: 20%">
+<div class="login">
+        <div class="login-triangle"></div>
+
+        <h2 class="login-header">Log in</h2>
+    <form:form modelAttribute="user" action="registration" method="post">
+
+        <form class="login-container">
+            <p><form:input path="username" type="text" placeholder="user name"/></p>
+            <p><form:input path="email" type="email" placeholder="email"/></p>
+            <p><form:input path="phoneNumber"  placeholder="phone"/></p>
+            <p><form:input path="password" type="password" placeholder="Password"/></p>
+            <p><input type="submit" value="Log in"></p>
+        </form>
+    </form:form>
+</div>
+    <%--<div style="text-align: center; margin-top: 20%">
         <form action="registration" method="post">
             <input name="username" placeholder="username">
             <br>
             <br>
-            <input name="email" placeholder="email">
+            <input name="email" placeholder="email" type="email" required="required" >
             <br>
             <br>
             <input name="phoneNumber" placeholder="phone number">
@@ -27,6 +44,6 @@
             <br>
             <button>sign up</button>
         </form>
-    </div>
+    </div>--%>
 </body>
 </html>
