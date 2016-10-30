@@ -32,6 +32,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     @Autowired
     private UserRepository userRepository;
 
+
     @Autowired
     private CommodityRepository commodityRepository;
 
