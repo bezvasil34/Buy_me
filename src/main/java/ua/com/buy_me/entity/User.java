@@ -1,21 +1,34 @@
 package ua.com.buy_me.entity;
 
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 /**
  * Created by koko on 14.10.16.
  */
 @Entity
-public class User {
+public class User implements UserDetails{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    @Column(unique = true)
     private String username;
     private String email;
     private String phoneNumber;
     private String password;
+
+    private String pathImage;
+
+    @Enumerated
+    private Role role;
+
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "user_commodity",
             joinColumns = @JoinColumn(name = "id_user"),
@@ -32,6 +45,10 @@ public class User {
         this.password = password;
     }
 
+    public String getOriginUsername(){
+        return username;
+    }
+
     public int getId() {
         return id;
     }
@@ -41,7 +58,7 @@ public class User {
     }
 
     public String getUsername() {
-        return username;
+        return String.valueOf(id);
     }
 
     public void setUsername(String username) {
@@ -80,6 +97,22 @@ public class User {
         this.commodities = commodities;
     }
 
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
+    }
+
+    public String getPathImage() {
+        return pathImage;
+    }
+
+    public void setPathImage(String pathImage) {
+        this.pathImage = pathImage;
+    }
+
     @Override
     public String toString() {
         return "User{" +
@@ -89,5 +122,33 @@ public class User {
                 ", phoneNumber='" + phoneNumber + '\'' +
                 ", password='" + password + '\'' +
                 '}';
+    }
+
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        List<SimpleGrantedAuthority>authorities = new ArrayList<>();
+        authorities.add(new SimpleGrantedAuthority(role.name()));
+        return authorities;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
     }
 }

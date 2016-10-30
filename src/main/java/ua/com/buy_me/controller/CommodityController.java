@@ -51,7 +51,7 @@ public class CommodityController {
     public String commodity(Model model){
         model.addAttribute("commodities", commodityService.findAll());
         model.addAttribute("countries", countryService.findAll());
-        model.addAttribute("subcategories", subCategoryService.findAll());
+        model.addAttribute("subcategories", subCategoryService.findAllfetch());
         model.addAttribute("commodity", new Commodity());
         return "commodity";
     }
@@ -60,7 +60,6 @@ public class CommodityController {
     public String newCommodity(@ModelAttribute Commodity commodity, @RequestParam String subCategoryID,
                                @RequestParam String countryID){
 
-//        Commodity commodity = new Commodity(name, description, Double.parseDouble(price));
         commodity.setSubCategory(subCategoryService.findOne(Integer.parseInt(subCategoryID)));
         commodity.setCountry(countryService.findOne(Integer.parseInt(countryID)));
 

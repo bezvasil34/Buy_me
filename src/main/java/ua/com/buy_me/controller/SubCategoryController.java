@@ -3,10 +3,7 @@ package ua.com.buy_me.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import ua.com.buy_me.entity.Category;
 import ua.com.buy_me.entity.SubCategory;
 import ua.com.buy_me.service.CategoryService;
@@ -25,14 +22,15 @@ public class SubCategoryController {
 
     @RequestMapping(value = "/subCategory", method = RequestMethod.GET)
     public String subCategory(Model model){
+        model.addAttribute("subCategory", new SubCategory());
         model.addAttribute("subCategories", subCategoryService.findAllfetch());
         model.addAttribute("categories", categoryService.findAll());
         return "subCategory";
     }
 
     @RequestMapping(value = "/newSubCategory", method = RequestMethod.POST)
-    public String newSubCategory(@RequestParam String name, @RequestParam String categoryID){
-        SubCategory subCategory = new SubCategory(name);
+    public String newSubCategory(@ModelAttribute SubCategory subCategory,
+                                 @RequestParam String categoryID){
         subCategory.setCategory(categoryService.findOne(Integer.parseInt(categoryID)));
         subCategoryService.save(subCategory);
         return "redirect:/subCategory";

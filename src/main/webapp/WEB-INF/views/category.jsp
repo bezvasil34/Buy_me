@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%--
   Created by IntelliJ IDEA.
   User: koko
@@ -14,12 +15,12 @@
 <body>
 <a href="home">home</a>
     <div style="text-align: center; margin-top: 20%">
-        <form action="newCategory" method="post">
-            <input name="name" placeholder="category name">
+        <form:form modelAttribute="category" action="newCategory" method="post">
+            <form:input path="name" placeholder="category name"/>
             <br>
             <br>
             <button>save category</button>
-        </form>
+        </form:form>
     </div>
 <br>
     <div style="text-align: center; margin-top: 30px">

@@ -15,7 +15,7 @@ public class Commodity {
     private String name;
     private String description;
     private double price;
-    private int likeCounter;
+    private int quantity;
 
     @ManyToOne(fetch = FetchType.LAZY)
     private Country country;
@@ -33,10 +33,11 @@ public class Commodity {
     public Commodity() {
     }
 
-    public Commodity(String name, String description, double price) {
+    public Commodity(String name, String description, double price, int quantity) {
         this.name = name;
         this.description = description;
         this.price = price;
+        this.quantity = quantity;
     }
 
     public int getId() {
@@ -67,18 +68,6 @@ public class Commodity {
         return price;
     }
 
-    public void setPrice(double price) {
-        this.price = price;
-    }
-
-    public int getLikeCounter() {
-        return likeCounter;
-    }
-
-    public void setLikeCounter(int likeCounter) {
-        this.likeCounter = likeCounter;
-    }
-
     public Country getCountry() {
         return country;
     }
@@ -103,14 +92,25 @@ public class Commodity {
         this.users = users;
     }
 
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+
     @Override
     public String toString() {
         return "Commodity{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
+                "name='" + name + '\'' +
                 ", description='" + description + '\'' +
                 ", price=" + price +
-                ", likeCounter=" + likeCounter +
+                ", quantity=" + quantity +
                 '}';
     }
 }

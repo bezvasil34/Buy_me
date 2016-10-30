@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%--
   Created by IntelliJ IDEA.
   User: koko
@@ -14,8 +15,8 @@
 <body>
 <a href="home">home</a>
     <div style="text-align: center; margin-top: 20%">
-        <form action="newSubCategory" method="post">
-            <input name="name" placeholder="subcategory name">
+        <form:form modelAttribute="subCategory" action="newSubCategory" method="post">
+            <form:input path="name" placeholder="subcategory name"/>
             <select name="categoryID">
                 <c:forEach var="category" items="${categories}">
                     <option value="${category.id}">${category.name}</option>
@@ -24,7 +25,7 @@
             <br>
             <br>
             <button>save subCategory</button>
-        </form>
+        </form:form>
     </div>
 
     <div style="text-align: center; margin-top: 30px">

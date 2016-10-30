@@ -1,3 +1,4 @@
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%--
   Created by IntelliJ IDEA.
   User: koko
@@ -13,12 +14,12 @@
 <body>
 <a href="home">home</a>
     <div style="text-align: center; margin-top: 20%">
-        <form action="newCountry" method="post">
-            <input name="name" placeholder="country name">
+        <form:form modelAttribute="country" action="newCountry" method="post">
+            <form:input path="name" placeholder="country name"/>
             <br>
             <br>
             <button>save subCategory</button>
-        </form>
+        </form:form>
     </div>
 </body>
 </html>

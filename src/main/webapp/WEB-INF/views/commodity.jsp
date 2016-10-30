@@ -14,36 +14,18 @@
 </head>
 <body>
 <a href="home">home</a>
-    <%--<div style="text-align: center; margin-top: 20%">
-        <form action="newCommodity" method="post">
-            <input name="name" placeholder="commodity name">
-            <input name="description" placeholder="description">
-            <input name="price" placeholder="price">
-            <select name="subCategoryID">
-                <option>choose subCategory</option>
-                <c:forEach var="subCategory" items="${subcategories}">
-                    <option value="${subCategory.id}">${subCategory.name}</option>
-                </c:forEach>
-            </select>
-            <select name="countryID">
-                <option>choose country</option>
-                <c:forEach var="country" items="${countries}">
-                    <option value="${country.id}">${country.name}</option>
-                </c:forEach>
-            </select>
-            <br>
-            <br>
-            <button>save subCategory</button>
-        </form>--%>
+
 <div style="text-align: center; margin-top: 20%">
 <form:form modelAttribute="commodity" action="newCommodity" method="post">
-    <input name="name" placeholder="commodity name">
-    <input name="description" placeholder="description">
-    <input name="price" placeholder="price">
+    <form:input path="name" placeholder="commodity name"/>
+    <form:input path="description" placeholder="description"/>
+    <form:input path="price" placeholder="price"/>
+    <form:input path="quantity" placeholder="quantity" type="number"/>
+
     <select name="subCategoryID">
         <option>choose subCategory</option>
         <c:forEach var="subCategory" items="${subcategories}">
-            <option value="${subCategory.id}">${subCategory.name}</option>
+            <option value="${subCategory.id}">${subCategory.name} ${subCategory.category.name}</option>
         </c:forEach>
     </select>
     <select name="countryID">
@@ -54,7 +36,7 @@
     </select>
     <br>
     <br>
-    <button>save subCategory</button>
+    <button>save commodity</button>
 </form:form>
 
     </div>

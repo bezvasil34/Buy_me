@@ -1,30 +1,50 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%--
-  Created by IntelliJ IDEA.
-  User: koko
-  Date: 14.10.16
-  Time: 1:03
-  To change this template use File | Settings | File Templates.
---%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+         pageEncoding="UTF-8" %>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<!DOCTYPE html>
 <html>
 <head>
-    <title>Title</title>
-</head>
-<body>
-    <div style="text-align: center">
-        <a href="admin">admin page</a>
-        <br>
-        <br>
-        <a href="registration">registration</a>
-    </div>
 
-    <div style="text-align: center; margin-top: 30px">
-        <c:forEach var="commodity" items="${commodities}">
-            ${commodity}
-            <a href="buy/${commodity.id}">buy</a>
-        </c:forEach>
-    </div>
+    <title>buy_me</title>
+
+</head>
+
+<body>
+<sec:authentication property="name"/>
+<sec:authorize access="hasRole('ROLE_ADMIN')">
+    <a href="admin">admin</a>
+</sec:authorize>
+<sec:authorize access="!isAuthenticated()">
+    <a href="loginpage">login</a>
+    <a href="registration">registration</a>
+</sec:authorize>
+<br>
+
+<sec:authorize access="isAuthenticated()">
+    <form:form action="logout" method="post">
+        <button>logout</button>
+    </form:form>
+    <a href="profile">your profile</a>
+</sec:authorize>
+<br>
+<br>
+<br>
+
+<c:forEach var="commodity" items="${commodities}">
+
+    <form:form action="getOrder" method="post">
+        ${commodity.name} ${commodity.quantity} ${commodity.price}
+            <sec:authorize access="isAuthenticated()">
+            <input type="hidden" name="commodityId" value="${commodity.id}">
+            <input name="quantity" value="0" type="number" placeholder="quantity">
+                <button>get order</button>
+            </sec:authorize>
+    </form:form>
+
+    <br>
+</c:forEach>
 
 </body>
 </html>
