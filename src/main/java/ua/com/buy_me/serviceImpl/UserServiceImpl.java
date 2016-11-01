@@ -74,7 +74,8 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         String path = System.getProperty("catalina.home")+"/resources/"
                 + user.getOriginUsername() + "/" + multipartFile.getOriginalFilename();
 
-        user.setPathImage("/resources/"+user.getOriginUsername() + "/" + multipartFile.getOriginalFilename());
+        user.setPathImage("resources/"+user.getOriginUsername() + "/"
+                + multipartFile.getOriginalFilename());
         
         File file = new File(path);
 
